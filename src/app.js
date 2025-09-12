@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = 80;
 
 // 뷰 엔진 설정
 app.set('view engine', 'ejs');
@@ -34,6 +34,26 @@ app.get('/quality', (req, res) => {
 app.get('/vision', (req, res) => {
   res.render('vision', { title: '미래 비전' });
 });
+
+app.get('/about', (req, res) => {
+  res.render('about', { title: '내정보' });
+});
+
+app.get('/login', (req, res) => {
+  res.render('login', { title: '로그인' });
+});
+
+app.post('/login-action', (req, res) => {
+  // 폼의 name 속성과 일치하게 변수명을 수정합니다.
+  const { username, passwd } = req.body; 
+
+  console.log("username:", username);
+  console.log("password:", passwd);
+  
+  res.send(`USER: ${username}, PWD: ${passwd}`);
+
+});
+
 
 // 서버 실행
 app.listen(port, () => {
